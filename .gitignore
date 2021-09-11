@@ -127,3 +127,9 @@ dmypy.json
 
 # Pyre type checker
 .pyre/
+
+# Exclude database
+northwind/resources/database/Northwind.sqlite
+
+# Exclude log files
+*.log
