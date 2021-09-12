@@ -41,3 +41,5 @@ Navigate to the Swagger UI via your browser
 http://localhost:8098/v1/ui
 ```
 Note: The default port for the HTTP Server is 8098. You can change this setting in the northwind.properties file in ./northwind/resources/.
+
+Basic authentication is enabled and a username / password has to be supplied for any REST API service to respond. Current implementation does not verify credentials and can accept any username and password.
