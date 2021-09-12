@@ -5,6 +5,7 @@ import configparser
 from datetime import datetime
 from northwind.adapter.repository.sqlite_datastore_context import SQLiteDatastoreContext
 from northwind.adapter.repository.sqlite_product_detail_repository import SQLiteProductDetailRepository
+from northwind.service.service_manager import ServiceManager
 
 try:
     logging.config.fileConfig('./northwind/resources/logging.conf',disable_existing_loggers=False)
@@ -23,9 +24,13 @@ except Exception as ex:
 
 datastore_context = SQLiteDatastoreContext(app_config)
 product_detail_repository = SQLiteProductDetailRepository(datastore_context)
+service_manager = ServiceManager(product_detail_repository)
 
 def get_app_config():
     return app_config
 
 def get_product_detail_repository():
     return product_detail_repository
+
+def get_service_manager():
+    return service_manager

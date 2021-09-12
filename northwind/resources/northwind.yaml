@@ -1,0 +1,120 @@
+openapi: "3.0.0"
+info:
+  version: 0.1.0
+  title: Northwind Product Data Service
+  license:
+    name: Andrew Gordon
+servers:
+  - url: http://localhost:8098/v1
+paths:
+  /productdetails:
+    get:
+      summary: Search for product details
+      operationId: northwind.adapter.http_rest.product_details_controller.search
+      tags:
+        - productdetails
+      parameters:
+        - name: name
+          in: query
+          description: Name of product
+          required: false
+          schema:
+            type: string
+        - name: unit_price_from
+          in: query
+          description: Lower product unit price range
+          required: false
+          schema:
+            type: number
+            format: float
+        - name: unit_price_to
+          in: query
+          description: Upper product unit price range
+          required: false
+          schema:
+            type: number
+            format: float
+        - name: category_name
+          in: query
+          description: Product category name
+          required: false
+          schema:
+            type: string       
+      responses:
+        "200":
+          description: A paged array of product details
+          headers:
+            x-next:
+              description: A link to the next page of responses
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ProductDetails"
+        default:
+          description: unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+      security:
+        - basic: []
+components:
+  schemas:
+    ProductDetail:
+      required:
+        - name
+        - quantity_per_unit
+        - unit_price
+        - units_in_stock
+        - units_on_order
+        - reorder_level
+        - discontinued
+        - category_name
+        - category_description
+        - supplier_name
+        - supplier_region        
+      properties:
+        name:
+          type: string
+        quantity_per_unit:
+          type: integer
+        unit_price:
+          type: number
+          format: float
+        units_in_stock:
+          type: integer
+        units_on_order:
+          type: integer
+        reorder_level:
+          type: integer
+        discontinued:
+          type: integer
+        category_name:
+          type: string
+        category_description:
+          type: string
+        supplier_name:
+          type: string
+        supplier_region:
+          type: string      
+    ProductDetails:
+      type: array
+      items:
+        $ref: "#/components/schemas/ProductDetail" 
+    Error:
+      required:
+        - code
+        - message
+      properties:
+        code:
+          type: integer
+          format: int32
+        message:
+          type: string
+  securitySchemes:
+    basic:
+      type: http
+      scheme: basic
+      x-basicInfoFunc: northwind.adapter.http_rest.auth_controller.basic

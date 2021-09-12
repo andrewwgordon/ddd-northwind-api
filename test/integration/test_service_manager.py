@@ -10,7 +10,6 @@ def test_service_manager():
     )
     results = service_manager.handle(search_for_product_details)
     if results is not None:
-        print(results)
         assert results[0].name == 'Chai'
     else:
         assert 1 == 0
