@@ -1,6 +1,8 @@
 # Domain-Driven Design CQRS Microservice OpenAPI Demo
 ## Overview
 This project is an example [Domain-Driven Design](https://martinfowler.com/bliki/DomainDrivenDesign.html) [Microservice](https://microservices.io/index.html) supporting [OpenAPI](https://www.openapis.org/). The purpose of the project is an education "toy" application to articulate DDD and Microservice best practices.
+
+The project is built upon the [Connexion OpenAPI](https://connexion.readthedocs.io/en/latest/) framework, itself leveraging [Flask](https://flask.palletsprojects.com/en/2.0.x/). [Waitress](https://docs.pylonsproject.org/projects/waitress/en/latest/) is configured as the default [WSGI](https://en.wikipedia.org/wiki/Web_Server_Gateway_Interface) HTTP Server and is suitable for production deployment.
 ## Quick Start
 
 ### Prequisites
